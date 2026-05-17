@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Samples and Beampatterns – Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px auto; max-width: 1000px; line-height: 1.6; }
+    h1, h2 { text-align: center; color: #003366; }
+    h2 { margin-top: 50px; border-bottom: 2px solid #003366; padding-bottom: 8px; }
+    h3.collage-title { text-align: center; color: #333; margin-top: 40px; font-size: 1.4em; }
+    audio { width: 100%; margin: 8px 0 12px 0; outline: none; }
+    img { width: 100%; border: 1px solid #ccc; border-radius: 6px; margin-top: 8px; }
+    section { margin-bottom: 60px; }
+    footer { text-align: center; font-size: 0.9em; color: #666; margin-top: 60px; border-top: 1px solid #ccc; padding-top: 20px;}
+
+    /* ---- Analysis grid layout ---- */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (min-width: 800px) {
+      .analysis-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .card {
+      border: 1px solid #d9d9d9;
+      border-radius: 10px;
+      padding: 16px;
+      background: #fafafa;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin: 0 0 8px 0;
+      color: #003366;
+      font-size: 1.1em;
+    }
+    .small-note {
+      font-size: 1em;
+      color: #444;
+      margin: 15px auto 30px auto;
+      max-width: 850px;
+      text-align: justify;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid #003366;
+      background: #e6f0fa;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #003366;
+    }
+    .alert-box {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffeeba;
+      padding: 12px 20px;
+      margin: 20px 0;
+      font-size: 0.95em;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Audio Samples and Beampatterns – Linearly Constrained Deep Beamformer for Multi-Speaker Scenarios</h1>
+  <p style="text-align:center; font-size: 1.1em;">
+    <strong>Ilai Zaidel, Ori Engel, Bar Engel, and Sharon Gannot</strong>  
+  </p>
+
+  <p class="small-note">
+    We propose a deep beamforming framework for enhancing target speaker(s) in multi-speaker environments. 
+    A deep neural network (DNN) is trained to estimate beamforming weights directly from noisy multichannel 
+    inputs while satisfying linear spatial constraints through an adaptive multi-term loss inspired by the 
+    augmented Lagrangian framework. The loss combines signal reconstruction with penalties that enforce a 
+    distortionless response toward the target and suppress the interference subspace. The model is further 
+    guided by the target relative transfer function (RTF) and the estimated interference subspace. 
+    The proposed model can direct a beam toward the target speaker while directing nulls toward the 
+    interfering sources, achieving superior overall enhancement performance compared with the classical 
+    LCMV beamformer constructed by the same estimated spatial signatures. Furthermore, compared with the 
+    LCMV beamformer, the proposed model produces more controlled sidelobes and improved background-noise 
+    attenuation.
+    <br><br>
+    <em>Note: We recommend listening with headphones.</em>
+  </p>
+
+  <section id="scenario-1">
+    <h2>Scenario 1: Two Speakers (Anechoic / No Reverberation)</h2>
+    <p class="small-note" style="text-align: center;">One target speaker and one interfering speaker.</p>
+
+    <div class="analysis-grid">
+      <div class="card">
+        <div class="pill">Input</div>
+        <h3>Noisy Mixture</h3>
+        <audio controls src="Recordings/Model/2speakers_NoReverberation/Mixture/mixture.wav"></audio>
+        <img src="Spectrograms/Model/2speakers_NoReverberation/mixture.png" alt="Mixture Spectrogram">
+      </div>
+
+      <div class="card">
+        <div class="pill">Reference</div>
+        <h3>Clean Target</h3>
+        <audio controls src="Recordings/Model/2speakers_NoReverberation/Clean_Target/clean_target.wav"></audio>
+        <img src="Spectrograms/Model/2speakers_NoReverberation/clean_target.png" alt="Clean Target Spectrogram">
+      </div>
+
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Model Output (Estimated RTFs)</h3>
+        <audio controls src="Recordings/Model/2speakers_NoReverberation/Output/output.wav"></audio>
+        <img src="Beampatterns/Model/2speakers_NoReverberation/beampattern.png" alt="Model Beampattern">
+        <img src="Spectrograms/Model/2speakers_NoReverberation/output.png" alt="Model Spectrogram">
+      </div>
+
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>LCMV Output</h3>
+        <audio controls src="Recordings/LCMV/2speakers_NoReverberation/output.wav"></audio>
+        <img src="Beampatterns/LCMV/2speakers_NoReverberation/beampattern.png" alt="LCMV Beampattern">
+        <img src="Spectrograms/LCMV/2speakers_NoReverberation/output.png" alt="LCMV Spectrogram">
+      </div>
+    </div>
+  </section>
+
+  <section id="scenario-2">
+    <h2>Scenario 2: Three Speakers (Anechoic / No Reverberation)</h2>
+    <p class="small-note" style="text-align: center;">One target speaker and two interfering speakers.</p>
+
+    <div class="analysis-grid">
+      <div class="card">
+        <div class="pill">Input</div>
+        <h3>Noisy Mixture</h3>
+        <audio controls src="Recordings/Model/3speakers_NoReverberation/Mixture/mixture.wav"></audio>
+      </div>
+
+      <div class="card">
+        <div class="pill">Reference</div>
+        <h3>Clean Target</h3>
+        <audio controls src="Recordings/Model/3speakers_NoReverberation/Clean_Target/clean_target.wav"></audio>
+      </div>
+
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Model Output (Estimated RTFs)</h3>
+        <audio controls src="Recordings/Model/3speakers_NoReverberation/Output/output.wav"></audio>
+        <img src="Beampatterns/Model/3speakers_NoReverberation/beampattern.png" alt="Model Beampattern">
+      </div>
+
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>LCMV Output</h3>
+        <audio controls src="Recordings/LCMV/3speakers_NoReverberation/output.wav"></audio>
+        <img src="Beampatterns/LCMV/3speakers_NoReverberation/beampattern.png" alt="LCMV Beampattern">
+      </div>
+    </div>
+  </section>
+
+  <section id="scenario-3">
+    <h2>Scenario 3: Two Speakers (Reverberant Environment)</h2>
+    <p class="small-note" style="text-align: center;">
+      Challenging room acoustics with multi-path reflections. T<sub>60</sub> &isin; [0.3, 0.55] s.<br><br>
+      <em><strong>Note:</strong> 2D polar beampatterns are omitted here, as dense multipath reflections make standard spatial plots distorted and difficult to interpret visually.</em>
+	  <br><br>
+	  <em><strong>Reminder:</strong> Our objective is spatial interference suppression, not dereverberation.</em>
+    </p>
+
+    <div class="analysis-grid">
+      <div class="card">
+        <div class="pill">Input</div>
+        <h3>Noisy Mixture</h3>
+        <audio controls src="Recordings/Model/2speakers_Reverberation/Mixture/mixture.wav"></audio>
+      </div>
+
+      <div class="card">
+        <div class="pill">Reference</div>
+        <h3>Clean Target</h3>
+        <audio controls src="Recordings/Model/2speakers_Reverberation/Clean_Target/clean_target.wav"></audio>
+      </div>
+
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Model Output (Estimated RTFs)</h3>
+        <audio controls src="Recordings/Model/2speakers_Reverberation/Output/output.wav"></audio>
+      </div>
+
+      <div class="card">  
+        <div class="pill">Baseline</div>
+        <h3>LCMV Output</h3>
+        <audio controls src="Recordings/LCMV/2speakers_Reverberation/output.wav"></audio>
+      </div>
+    </div>
+  </section>
+
+  <section id="extra-beampatterns">
+    <h2>Additional Beampattern Examples</h2>
+    <p class="small-note" style="text-align: center;">Further demonstrating the spatial nulling stability across different random room geometries.</p>
+
+    <h3 class="collage-title">Two Speakers (Anechoic)</h3>
+    <div class="analysis-grid">
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Example 1 (Model - Estimated RTFs)</h3>
+        <img src="Beampatterns/Model/2speakers_NoReverberation/extra_1.png" alt="Model Extra 1">
+      </div>
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>Example 1 (LCMV)</h3>
+        <img src="Beampatterns/LCMV/2speakers_NoReverberation/extra_1.png" alt="LCMV Extra 1">
+      </div>
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Example 2 (Model - Estimated RTFs)</h3>
+        <img src="Beampatterns/Model/2speakers_NoReverberation/extra_2.png" alt="Model Extra 2">
+      </div>
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>Example 2 (LCMV)</h3>
+        <img src="Beampatterns/LCMV/2speakers_NoReverberation/extra_2.png" alt="LCMV Extra 2">
+      </div>
+    </div>
+
+    <h3 class="collage-title">Three Speakers (Anechoic)</h3>
+    <div class="analysis-grid">
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Example 1 (Model - Estimated RTFs)</h3>
+        <img src="Beampatterns/Model/3speakers_NoReverberation/extra_1.png" alt="Model Extra 1">
+      </div>
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>Example 1 (LCMV)</h3>
+        <img src="Beampatterns/LCMV/3speakers_NoReverberation/extra_1.png" alt="LCMV Extra 1">
+      </div>
+      <div class="card">
+        <div class="pill">Proposed Method</div>
+        <h3>Example 2 (Model - Estimated RTFs)</h3>
+        <img src="Beampatterns/Model/3speakers_NoReverberation/extra_2.png" alt="Model Extra 2">
+      </div>
+      <div class="card">
+        <div class="pill">Baseline</div>
+        <h3>Example 2 (LCMV)</h3>
+        <img src="Beampatterns/LCMV/3speakers_NoReverberation/extra_2.png" alt="LCMV Extra 2">
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Ilai Zaidel, Ori Engel, Bar Engel, Sharon Gannot · Bar-Ilan University Speech Processing Lab
+  </footer>
+
+</body>
+</html>
